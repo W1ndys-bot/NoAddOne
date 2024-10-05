@@ -71,15 +71,24 @@ async def handle_NoAddOne_group_message(websocket, msg):
         # 鉴权
         if is_authorized(role, user_id):
             # 管理员命令
-            if raw_message == "nacon":
+            if raw_message == "naoon":
                 save_function_status(group_id, True)
                 await send_group_msg(
                     websocket, group_id, f"[CQ:reply,id={message_id}]已开启打断复读"
                 )
-            elif raw_message == "naoff":
+            elif raw_message == "naooff":
                 save_function_status(group_id, False)
                 await send_group_msg(
                     websocket, group_id, f"[CQ:reply,id={message_id}]已关闭打断复读"
+                )
+            elif raw_message == "noaddone":
+                await send_group_msg(
+                    websocket,
+                    group_id,
+                    f"[CQ:reply,id={message_id}]打断复读:\n"
+                    + "naoon - 开启打断复读\n"
+                    + "naooff - 关闭打断复读\n"
+                    + "noaddone - 显示此帮助菜单",
                 )
 
         # 检查开关
