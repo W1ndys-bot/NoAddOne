@@ -45,9 +45,7 @@ def process_message(group_id, message):
     if message == state["last_message"]:
         state["message_count"] += 1
         if state["message_count"] == 2:
-            shuffled_message = message
-            while shuffled_message == message:
-                shuffled_message = "".join(random.sample(message, len(message)))
+            shuffled_message = "".join(random.sample(message, len(message)))
             state["message_count"] = 0
             return shuffled_message
     else:
